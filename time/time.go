@@ -30,12 +30,12 @@ func (t helper) GetCurrLayout() string {
 
 // NowCarbon 返回 Carbon 类型的当前时间。
 func (t helper) NowCarbon() carbon.Carbon {
-	return carbon.Now(currLayout)
+	return *carbon.Now(currLayout)
 }
 
 // NowTime 返回标准库 time.Time 类型的当前时间。
 func (t helper) NowTime() time.Time {
-	return t.NowCarbon().StdTime()
+	return t.NowCarbonPtr().StdTime()
 }
 
 // NowCarbonPtr 返回 Carbon 类型的当前时间指针。
@@ -46,7 +46,7 @@ func (t helper) NowCarbonPtr() *carbon.Carbon {
 
 // StrToCarbon 使用当前配置的 Carbon 时区解析 strTime。
 func (t helper) StrToCarbon(strTime string) carbon.Carbon {
-	return carbon.Parse(strTime, currLayout)
+	return *carbon.Parse(strTime, currLayout)
 }
 
 // StrToCarbonPtr 解析 strTime，解析失败时返回 nil。
@@ -73,8 +73,7 @@ func (t helper) StartOfDay(strTime *string) *carbon.Carbon {
 		return nil
 	}
 
-	startAt := dstTime.StartOfDay()
-	return &startAt
+	return dstTime.StartOfDay()
 }
 
 // EndOfDay 返回指定日期的结束时间，输入无效时返回 nil。
@@ -84,13 +83,12 @@ func (t helper) EndOfDay(strTime *string) *carbon.Carbon {
 		return nil
 	}
 
-	endAt := dstTime.EndOfDay()
-	return &endAt
+	return dstTime.EndOfDay()
 }
 
 // NowFormatTime 使用 layout 格式化当前时间。
 func (t helper) NowFormatTime(layout string) string {
-	return t.NowCarbon().StdTime().Format(layout)
+	return t.NowCarbonPtr().StdTime().Format(layout)
 }
 
 // func FormatTime(time carbon.Carbon) string {
@@ -129,7 +127,7 @@ func (t helper) AddDayToDate(at *carbon.Carbon, days int) string {
 	if at == nil {
 		return ""
 	}
-	return t.CarbonToDate(at.AddDays(days))
+	return t.CarbonToDate(*at.AddDays(days))
 }
 
 // func (t helper) FormatPointerTime(time *carbon.Carbon) *string {
@@ -146,53 +144,52 @@ func (t helper) PStrToPCarbonDate(str *string) *carbon.Carbon {
 	if at == nil {
 		return nil
 	}
-	startAt := at.StartOfDay()
-	return &startAt
+	return at.StartOfDay()
 }
 
 // NowUnixNano 返回当前时间的纳秒级 Unix 时间戳。
 func (t helper) NowUnixNano() int64 {
-	return t.NowCarbon().StdTime().UnixNano()
+	return t.NowCarbonPtr().StdTime().UnixNano()
 }
 
 // NowUnixMilli 返回当前时间的毫秒级 Unix 时间戳。
 func (t helper) NowUnixMilli() int64 {
-	return t.NowCarbon().StdTime().UnixMilli()
+	return t.NowCarbonPtr().StdTime().UnixMilli()
 }
 
 // NowUnix 返回当前时间的秒级 Unix 时间戳。
 func (t helper) NowUnix() int64 {
-	return t.NowCarbon().StdTime().Unix()
+	return t.NowCarbonPtr().StdTime().Unix()
 }
 
 // NowNanosecond 返回当前秒内的纳秒偏移量。
 func (t helper) NowNanosecond() int {
-	return t.NowCarbon().StdTime().Nanosecond()
+	return t.NowCarbonPtr().StdTime().Nanosecond()
 }
 
 // NowAddSeconds 在当前时间基础上增加 d 秒。
 func (t helper) NowAddSeconds(d int) time.Time {
-	return t.NowCarbon().AddSeconds(d).StdTime()
+	return t.NowCarbonPtr().AddSeconds(d).StdTime()
 }
 
 // NowAddMinutes 在当前时间基础上增加 d 分钟。
 func (t helper) NowAddMinutes(d int) time.Time {
-	return t.NowCarbon().AddMinutes(d).StdTime()
+	return t.NowCarbonPtr().AddMinutes(d).StdTime()
 }
 
 // NowAddHours 在当前时间基础上增加 d 小时。
 func (t helper) NowAddHours(d int) time.Time {
-	return t.NowCarbon().AddHours(d).StdTime()
+	return t.NowCarbonPtr().AddHours(d).StdTime()
 }
 
 // NowAddDays 在当前时间基础上增加 d 天。
 func (t helper) NowAddDays(d int) time.Time {
-	return t.NowCarbon().AddDays(d).StdTime()
+	return t.NowCarbonPtr().AddDays(d).StdTime()
 }
 
 // NowAddMonths 在当前时间基础上增加 d 个月。
 func (t helper) NowAddMonths(d int) time.Time {
-	return t.NowCarbon().AddMonths(d).StdTime()
+	return t.NowCarbonPtr().AddMonths(d).StdTime()
 }
 
 // TodayRange 返回当天的开始和结束时间。
@@ -200,7 +197,7 @@ func (t helper) TodayRange() (carbon.Carbon, carbon.Carbon) {
 	nowCarbon := t.NowCarbon()
 	start := nowCarbon.StartOfDay()
 	end := nowCarbon.EndOfDay()
-	return start, end
+	return *start, *end
 }
 
 // TodyRange 返回当天的开始和结束时间。
@@ -217,18 +214,18 @@ func (t helper) CurrDayStartEnd() (startAt *carbon.Carbon, endAt *carbon.Carbon)
 
 // YdayRange 返回昨天的开始和结束时间。
 func (t helper) YdayRange() (carbon.Carbon, carbon.Carbon) {
-	yesterday := t.NowCarbon().SubDay()
+	yesterday := t.NowCarbonPtr().SubDay()
 	start := yesterday.StartOfDay()
 	end := yesterday.EndOfDay()
-	return start, end
+	return *start, *end
 }
 
 // PreMonthRange 返回上个月的开始和结束时间。
 func (t helper) PreMonthRange() (*carbon.Carbon, *carbon.Carbon) {
-	previousMonth := t.NowCarbon().SubMonth()
+	previousMonth := t.NowCarbonPtr().SubMonth()
 	start := previousMonth.StartOfMonth()
 	end := previousMonth.EndOfMonth()
-	return &start, &end
+	return start, end
 }
 
 // TimestampMilliseconds 返回当前时间的毫秒级 Unix 时间戳。
