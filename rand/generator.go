@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"sync/atomic"
 
-	"github.com/lily-study-utils/goutils/time"
+	"github.com/lily0749labs/goutils/time"
 )
 
 var (

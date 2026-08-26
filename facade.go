@@ -8,8 +8,8 @@ import (
 	randutil "github.com/lily-study-utils/goutils/rand"
 	stringutil "github.com/lily-study-utils/goutils/stringutil"
 	strutil "github.com/lily-study-utils/goutils/strto"
-	timeutil "github.com/lily-study-utils/goutils/time"
 	validutil "github.com/lily-study-utils/goutils/valid"
+	timeutil "github.com/lily0749labs/goutils/time"
 )
 
 var (
