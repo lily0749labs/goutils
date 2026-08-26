@@ -1,6 +1,12 @@
 # goutils
 
-Go 常用工具库的学习实现，核心 API 与 `github.com/lily0749labs/goutils v0.2.0` 保持一致。
+Go 常用工具库。
+
+## 安装
+
+```bash
+go get github.com/lily0749labs/goutils@latest
+```
 
 ## 模块
 
@@ -10,7 +16,12 @@ Go 常用工具库的学习实现，核心 API 与 `github.com/lily0749labs/gout
 - `Crypto`：哈希、AES、RSA 和 bcrypt
 - `Rand`：随机数、随机字符串和英文名
 - `ID`：UUID 和雪花 ID
+- `Money`：整数最小货币单位格式化
 - `Time`：日期、时间戳和时间范围
+- `String`：Unicode 字符串、脱敏和命名转换
+- `slice`：类型安全的泛型切片函数
+- `maps`：类型安全的泛型 Map 函数
+- `queue`：支持 Context 取消和并发关闭的泛型队列
 
 ## 使用门面
 
@@ -54,7 +65,9 @@ func main() {
 	}
 	fmt.Println(secureText)
 	fmt.Println(goutils.ID.Token())
+	fmt.Println(goutils.Money.FormatCents(12345))
 	fmt.Println(goutils.Time.NowTime())
+	fmt.Println(goutils.String.Mask("13800138000", 3, 4))
 }
 ```
 
@@ -81,10 +94,4 @@ RSA 加密推荐使用 `Crypto.EncryptRSAOAEP` / `DecryptRSAOAEP`，签名验签
 go test ./...
 go test -race ./...
 go vet ./...
-```
-
-运行交互示例：
-
-```bash
-go run ./examples
 ```

@@ -5,6 +5,7 @@ import (
 	anyutil "github.com/lily0749labs/goutils/anyto"
 	cryptoutil "github.com/lily0749labs/goutils/crypto"
 	idutil "github.com/lily0749labs/goutils/id"
+	moneyutil "github.com/lily0749labs/goutils/money"
 	randutil "github.com/lily0749labs/goutils/rand"
 	stringutil "github.com/lily0749labs/goutils/stringutil"
 	strutil "github.com/lily0749labs/goutils/strto"
@@ -19,6 +20,8 @@ var (
 	Crypto = cryptoutil.Crypto
 	// ID 提供 UUID 和雪花 ID 生成工具。
 	ID = idutil.ID
+	// Money 提供基于整数最小货币单位的金额工具。
+	Money = moneyutil.Money
 	// Rand 提供随机数、随机字符串和随机姓名工具。
 	Rand = randutil.Rand
 	// StrTo 提供字符串类型转换工具。
