@@ -3,13 +3,13 @@ package valid
 import "net"
 
 // IPv4 验证是否为 IPv4 地址。
-func (facade) IPv4(input string) bool {
+func (valid) IPv4(input string) bool {
 	ip := net.ParseIP(input)
 	return ip != nil && ip.To4() != nil
 }
 
 // IPv6 验证是否为 IPv6 地址。
-func (facade) IPv6(input string) bool {
+func (valid) IPv6(input string) bool {
 	ip := net.ParseIP(input)
 	return ip != nil && ip.To4() == nil
 }

@@ -7,13 +7,13 @@ import (
 )
 
 // Time 验证是否为时间格式（HH:mm:ss）。
-func (facade) Time(str string) bool {
+func (valid) Time(str string) bool {
 	reg := regexp.MustCompile(`^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$`)
 	return reg.MatchString(str)
 }
 
 // Date 验证是否为日期格式（YYYY-MM-DD）。
-func (facade) Date(str string) bool {
+func (valid) Date(str string) bool {
 	reg := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
 	if !reg.MatchString(str) {
 		return false
@@ -30,12 +30,12 @@ func (facade) Date(str string) bool {
 	return true
 }
 
-// isValidMonth 验证月份是否合法 (1-12)
+// isValidMonth 验证月份是否在 1 至 12 之间。
 func isValidMonth(month int) bool {
 	return month >= 1 && month <= 12
 }
 
-// isValidDay 验证天数是否合法
+// isValidDay 验证指定年月中的日期是否合法。
 func isValidDay(day, month, year int) bool {
 	switch month {
 	case 1, 3, 5, 7, 8, 10, 12:
@@ -53,7 +53,7 @@ func isValidDay(day, month, year int) bool {
 }
 
 // DateTime 验证是否为日期时间格式（yyyy-MM-dd HH:mm:ss）。
-func (f facade) DateTime(str string) bool {
+func (f valid) DateTime(str string) bool {
 	reg := regexp.MustCompile(`^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$`)
 	if !reg.MatchString(str) {
 		return false

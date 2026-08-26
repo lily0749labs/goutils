@@ -3,7 +3,7 @@ package anyto
 import "reflect"
 
 // Bool 将给定的值转换为 bool。
-func (facade) Bool(i any) bool {
+func (anyto) Bool(i any) bool {
 	if i == nil {
 		return false
 	}

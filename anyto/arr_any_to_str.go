@@ -1,87 +1,87 @@
 package anyto
 
-// AnySliceToStrings converts an any slice to a string slice.
-func (f facade) AnySliceToStrings(values []any) (result []string) {
+// AnySliceToStrings 将任意值切片转换为字符串切片。
+func (f anyto) AnySliceToStrings(values []any) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// IntSliceToStrings converts an int slice to a string slice.
-func (f facade) IntSliceToStrings(values []int) (result []string) {
+// IntSliceToStrings 将 int 切片转换为字符串切片。
+func (f anyto) IntSliceToStrings(values []int) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Int8SliceToStrings converts an int8 slice to a string slice.
-func (f facade) Int8SliceToStrings(values []int8) (result []string) {
+// Int8SliceToStrings 将 int8 切片转换为字符串切片。
+func (f anyto) Int8SliceToStrings(values []int8) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Int16SliceToStrings converts an int16 slice to a string slice.
-func (f facade) Int16SliceToStrings(values []int16) (result []string) {
+// Int16SliceToStrings 将 int16 切片转换为字符串切片。
+func (f anyto) Int16SliceToStrings(values []int16) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Int32SliceToStrings converts an int32 slice to a string slice.
-func (f facade) Int32SliceToStrings(values []int32) (result []string) {
+// Int32SliceToStrings 将 int32 切片转换为字符串切片。
+func (f anyto) Int32SliceToStrings(values []int32) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Int64SliceToStrings converts an int64 slice to a string slice.
-func (f facade) Int64SliceToStrings(values []int64) (result []string) {
+// Int64SliceToStrings 将 int64 切片转换为字符串切片。
+func (f anyto) Int64SliceToStrings(values []int64) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// UintSliceToStrings converts a uint slice to a string slice.
-func (f facade) UintSliceToStrings(values []uint) (result []string) {
+// UintSliceToStrings 将 uint 切片转换为字符串切片。
+func (f anyto) UintSliceToStrings(values []uint) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Uint8SliceToStrings converts a uint8 slice to a string slice.
-func (f facade) Uint8SliceToStrings(values []uint8) (result []string) {
+// Uint8SliceToStrings 将 uint8 切片转换为字符串切片。
+func (f anyto) Uint8SliceToStrings(values []uint8) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Uint16SliceToStrings converts a uint16 slice to a string slice.
-func (f facade) Uint16SliceToStrings(values []uint16) (result []string) {
+// Uint16SliceToStrings 将 uint16 切片转换为字符串切片。
+func (f anyto) Uint16SliceToStrings(values []uint16) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Uint32SliceToStrings converts a uint32 slice to a string slice.
-func (f facade) Uint32SliceToStrings(values []uint32) (result []string) {
+// Uint32SliceToStrings 将 uint32 切片转换为字符串切片。
+func (f anyto) Uint32SliceToStrings(values []uint32) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}
 	return result
 }
 
-// Uint64SliceToStrings converts a uint64 slice to a string slice.
-func (f facade) Uint64SliceToStrings(values []uint64) (result []string) {
+// Uint64SliceToStrings 将 uint64 切片转换为字符串切片。
+func (f anyto) Uint64SliceToStrings(values []uint64) (result []string) {
 	for _, value := range values {
 		result = append(result, f.String(value))
 	}

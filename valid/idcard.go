@@ -6,7 +6,7 @@ import (
 )
 
 // IDCard 验证身份证号（18 或 15 位）。
-func (f facade) IDCard(str string) bool {
+func (f valid) IDCard(str string) bool {
 	if len(str) != 15 && len(str) != 18 {
 		return false
 	}
@@ -17,25 +17,11 @@ func (f facade) IDCard(str string) bool {
 }
 
 // IDCard18 验证 18 位身份证号。
-func (facade) IDCard18(id string) bool {
+func (valid) IDCard18(id string) bool {
 	regExp := "^[1-9]\\d{5}(19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$"
 	if match, _ := regexp.MatchString(regExp, id); !match {
 		return false
 	}
-
-	// 判断身份证中 年、月、日 是否合法
-	//year, _ := strconv.Atoi(id[6:10])
-	//month, _ := strconv.Atoi(id[10:12])
-	//day, _ := strconv.Atoi(id[12:14])
-	//if year < 1900 || year > time.Now().Year() {
-	//	return false
-	//}
-	//if month < 1 || month > 12 {
-	//	return false
-	//}
-	//if day < 1 || day > 31 {
-	//	return false
-	//}
 
 	// 对身份证号码的最后一位进行校验
 	// 根据身份证号码的规则，最后一位可能是数字0-9，也可能是字符X（表示10）
@@ -77,7 +63,7 @@ func (facade) IDCard18(id string) bool {
 }
 
 // IDCard15 验证 15 位身份证号。
-func (facade) IDCard15(idCard string) bool {
+func (valid) IDCard15(idCard string) bool {
 	// 验证是否为15位数字
 	if match, _ := regexp.MatchString(`^\d{15}$`, idCard); !match {
 		return false

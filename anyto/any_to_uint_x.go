@@ -7,7 +7,7 @@ import (
 )
 
 // Uint 将给定的值转换为 uint。
-func (f facade) Uint(i any) (uint, error) {
+func (f anyto) Uint(i any) (uint, error) {
 	v, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
@@ -22,7 +22,7 @@ func (f facade) Uint(i any) (uint, error) {
 }
 
 // Uint8 将给定的值转换为 uint8。
-func (f facade) Uint8(i any) (uint8, error) {
+func (f anyto) Uint8(i any) (uint8, error) {
 	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
@@ -34,7 +34,7 @@ func (f facade) Uint8(i any) (uint8, error) {
 }
 
 // Uint16 将给定的值转换为 uint16。
-func (f facade) Uint16(i any) (uint16, error) {
+func (f anyto) Uint16(i any) (uint16, error) {
 	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
@@ -46,7 +46,7 @@ func (f facade) Uint16(i any) (uint16, error) {
 }
 
 // Uint32 将给定的值转换为 uint32。
-func (f facade) Uint32(i any) (uint32, error) {
+func (f anyto) Uint32(i any) (uint32, error) {
 	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
@@ -58,7 +58,7 @@ func (f facade) Uint32(i any) (uint32, error) {
 }
 
 // Uint64 将给定的值转换为 uint64。
-func (facade) Uint64(i any) (uint64, error) {
+func (anyto) Uint64(i any) (uint64, error) {
 	if i == nil {
 		return 0, nil
 	}

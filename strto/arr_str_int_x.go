@@ -1,7 +1,7 @@
 package strto
 
 // Ints 将字符串切片转换为 int 切片。
-func (f facade) Ints(values []string) (result []int) {
+func (f strto) Ints(values []string) (result []int) {
 	for _, value := range values {
 		result = append(result, f.Int(value))
 	}
@@ -9,7 +9,7 @@ func (f facade) Ints(values []string) (result []int) {
 }
 
 // Int8s 将字符串切片转换为 int8 切片。
-func (f facade) Int8s(values []string) (result []int8) {
+func (f strto) Int8s(values []string) (result []int8) {
 	for _, value := range values {
 		result = append(result, f.Int8(value))
 	}
@@ -17,7 +17,7 @@ func (f facade) Int8s(values []string) (result []int8) {
 }
 
 // Int16s 将字符串切片转换为 int16 切片。
-func (f facade) Int16s(values []string) (result []int16) {
+func (f strto) Int16s(values []string) (result []int16) {
 	for _, value := range values {
 		result = append(result, f.Int16(value))
 	}
@@ -25,7 +25,7 @@ func (f facade) Int16s(values []string) (result []int16) {
 }
 
 // Int32s 将字符串切片转换为 int32 切片。
-func (f facade) Int32s(values []string) (result []int32) {
+func (f strto) Int32s(values []string) (result []int32) {
 	for _, value := range values {
 		result = append(result, f.Int32(value))
 	}
@@ -33,7 +33,7 @@ func (f facade) Int32s(values []string) (result []int32) {
 }
 
 // Int64s 将字符串切片转换为 int64 切片。
-func (f facade) Int64s(values []string) (result []int64) {
+func (f strto) Int64s(values []string) (result []int64) {
 	for _, value := range values {
 		result = append(result, f.Int64(value))
 	}

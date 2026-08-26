@@ -1,7 +1,7 @@
 package strto
 
 // Bytes 将字符串转换为字节切片。
-func (facade) Bytes(v string) []byte {
+func (strto) Bytes(v string) []byte {
 	return []byte(v)
 }
 

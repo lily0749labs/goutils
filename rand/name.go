@@ -1,18 +1,18 @@
 package rand
 
 import (
-	"math/rand"
+	mathrand "math/rand"
 
 	engname "github.com/yelinaung/eng-name"
 
-	"github.com/lily0749labs/goutils/time"
+	"github.com/lily-study-utils/goutils/time"
 )
 
 // EnglishName 返回一个随机英文名。
-func (generator) EnglishName() string {
+func (rand) EnglishName() string {
 	seed := time.Time.NowUnixNano()
 	randName := engname.New(seed)
-	rr := rand.New(rand.NewSource(time.Time.NowUnixNano()))
+	rr := mathrand.New(mathrand.NewSource(time.Time.NowUnixNano()))
 	if rr.Intn(2) == 0 {
 		return randName.GetMenName()
 	}
@@ -20,14 +20,14 @@ func (generator) EnglishName() string {
 }
 
 // EnglishMaleName 返回一个随机男性英文名。
-func (generator) EnglishMaleName() string {
+func (rand) EnglishMaleName() string {
 	seed := time.Time.NowUnixNano()
 	randName := engname.New(seed)
 	return randName.GetMenName()
 }
 
 // EnglishFemaleName 返回一个随机女性英文名。
-func (generator) EnglishFemaleName() string {
+func (rand) EnglishFemaleName() string {
 	seed := time.Time.NowUnixNano()
 	randName := engname.New(seed)
 	return randName.GetWomenName()

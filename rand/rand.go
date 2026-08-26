@@ -1,27 +1,26 @@
 package rand
 
-//随机数相关算法
+// 随机数相关算法。
 import (
 	"bytes"
-	cryptorand "crypto/rand"
 	"fmt"
-	"math/rand"
+	mathrand "math/rand"
 	"sync"
 
 	"github.com/dromara/carbon/v2"
 )
 
 var (
-	rr   *rand.Rand
+	rr   *mathrand.Rand
 	rrMu sync.Mutex
 )
 
 func init() {
-	rr = rand.New(rand.NewSource(carbon.Now(carbon.Shanghai).StdTime().UnixNano()))
+	rr = mathrand.New(mathrand.NewSource(carbon.Now(carbon.Shanghai).StdTime().UnixNano()))
 }
 
 // Rand6 产生 6 位随机数。
-func (generator) Rand6() string {
+func (rand) Rand6() string {
 	rrMu.Lock()
 	defer rrMu.Unlock()
 	code := fmt.Sprintf("%06v", rr.Int31n(1000000))
@@ -29,7 +28,7 @@ func (generator) Rand6() string {
 }
 
 // Rand4 产生 4 位随机数。
-func (generator) Rand4() string {
+func (rand) Rand4() string {
 	rrMu.Lock()
 	defer rrMu.Unlock()
 	code := fmt.Sprintf("%04v", rr.Int31n(10000))
@@ -37,21 +36,21 @@ func (generator) Rand4() string {
 }
 
 // Intn 返回区间 [0, n) 内的伪随机整数。
-func (generator) Intn(n int) int {
+func (rand) Intn(n int) int {
 	rrMu.Lock()
 	defer rrMu.Unlock()
 	return rr.Intn(n)
 }
 
 // Int31n 返回区间 [0, n) 内的伪随机 int32。
-func (generator) Int31n(n int32) int32 {
+func (rand) Int31n(n int32) int32 {
 	rrMu.Lock()
 	defer rrMu.Unlock()
 	return rr.Int31n(n)
 }
 
 // Int63n 返回区间 [0, n) 内的伪随机 int64。
-func (generator) Int63n(n int64) int64 {
+func (rand) Int63n(n int64) int64 {
 	rrMu.Lock()
 	defer rrMu.Unlock()
 	return rr.Int63n(n)
@@ -59,41 +58,20 @@ func (generator) Int63n(n int64) int64 {
 
 var Chars = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
 
-// var AsciiChars = []byte("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+,.?/:;{}[]`~")
+// NewLenCharsE 产生指定长度的安全随机字符串，并报告非法参数或随机源错误。
+func (r rand) NewLenCharsE(length int) (string, error) {
+	return r.SecureStringWithCharset(length, string(Chars))
+}
 
 // NewLenChars 产生指定长度的随机字符串。
-func (generator) NewLenChars(length int) string {
-	if length <= 0 {
-		return ""
-	}
-	clen := len(Chars)
-	if clen < 2 || clen > 256 {
-		panic("Wrong charset length for NewLenChars()")
-	}
-	maxrb := 255 - (256 % clen)
-	b := make([]byte, length)
-	r := make([]byte, length+(length/4)) // storage for random bytes.
-	i := 0
-	for {
-		if _, err := cryptorand.Read(r); err != nil {
-			panic("Error reading random bytes: " + err.Error())
-		}
-		for _, rb := range r {
-			c := int(rb)
-			if c > maxrb {
-				continue // Skip this number to avoid modulo bias.
-			}
-			b[i] = Chars[c%clen]
-			i++
-			if i == length {
-				return string(b)
-			}
-		}
-	}
+// 失败时返回空字符串；需要错误信息时请使用 NewLenCharsE。
+func (r rand) NewLenChars(length int) string {
+	value, _ := r.NewLenCharsE(length)
+	return value
 }
 
 // UpperString 产生指定长度的大写字母随机字符串。
-func (g generator) UpperString(length int) string {
+func (g rand) UpperString(length int) string {
 	var result bytes.Buffer
 	var temp string
 	for i := 0; i < length; {
@@ -106,7 +84,7 @@ func (g generator) UpperString(length int) string {
 }
 
 // RandInt 返回区间 [min, max) 内的随机整数。
-func (g generator) RandInt(min, max int) int {
+func (g rand) RandInt(min, max int) int {
 	if min >= max {
 		return max
 	}
@@ -114,7 +92,7 @@ func (g generator) RandInt(min, max int) int {
 }
 
 // RandIntM 返回区间 [min, max] 内的随机整数。
-func (g generator) RandIntM(min, max int) int {
+func (g rand) RandIntM(min, max int) int {
 	if min >= max {
 		return max
 	}
@@ -122,8 +100,8 @@ func (g generator) RandIntM(min, max int) int {
 	return g.Intn(max-min) + min
 }
 
-// 传入指定概率，然后返回是否执行  比如 rate：90 表示有90%的概率要执行
-func (g generator) RateToExec(rate int) bool {
+// RateToExec 按百分比概率返回是否执行，rate 为 90 表示 90% 的概率。
+func (g rand) RateToExec(rate int) bool {
 	if rate <= 0 {
 		return false
 	}
@@ -133,8 +111,8 @@ func (g generator) RateToExec(rate int) bool {
 	return g.RandInt(0, 100) < rate
 }
 
-// 传入指定概率，然后返回是否执行  比如 rate：90 表示有90%的概率要执行
-func (g generator) RateToExecWan(rate int) bool {
+// RateToExecWan 按万分比概率返回是否执行，rate 为 9000 表示 90% 的概率。
+func (g rand) RateToExecWan(rate int) bool {
 	if rate <= 0 {
 		return false
 	}
@@ -144,8 +122,8 @@ func (g generator) RateToExecWan(rate int) bool {
 	return g.RandInt(0, 10000) < rate
 }
 
-// 从max中随机去一个数，看是否小于rate
-func (g generator) RateToExecWithIn(rate, max int) bool {
+// RateToExecWithIn 在 [0, max) 中取随机数，并判断其是否小于 rate。
+func (g rand) RateToExecWithIn(rate, max int) bool {
 	if rate <= 0 || max <= 0 {
 		return false
 	}

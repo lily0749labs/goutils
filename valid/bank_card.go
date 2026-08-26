@@ -1,7 +1,7 @@
 package valid
 
 // BankCardNo 验证是否为大陆银行卡号。
-func (facade) BankCardNo(cardNumber string) bool {
+func (valid) BankCardNo(cardNumber string) bool {
 	if len(cardNumber) != 16 && len(cardNumber) != 19 {
 		return false
 	}

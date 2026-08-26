@@ -1,7 +1,7 @@
 package strto
 
 // Uints 将字符串切片转换为 uint 切片。
-func (f facade) Uints(values []string) (result []uint) {
+func (f strto) Uints(values []string) (result []uint) {
 	for _, value := range values {
 		result = append(result, f.Uint(value))
 	}
@@ -9,7 +9,7 @@ func (f facade) Uints(values []string) (result []uint) {
 }
 
 // Uint8s 将字符串切片转换为 uint8 切片。
-func (f facade) Uint8s(values []string) (result []uint8) {
+func (f strto) Uint8s(values []string) (result []uint8) {
 	for _, value := range values {
 		result = append(result, f.Uint8(value))
 	}
@@ -17,7 +17,7 @@ func (f facade) Uint8s(values []string) (result []uint8) {
 }
 
 // Uint16s 将字符串切片转换为 uint16 切片。
-func (f facade) Uint16s(values []string) (result []uint16) {
+func (f strto) Uint16s(values []string) (result []uint16) {
 	for _, value := range values {
 		result = append(result, f.Uint16(value))
 	}
@@ -25,7 +25,7 @@ func (f facade) Uint16s(values []string) (result []uint16) {
 }
 
 // Uint32s 将字符串切片转换为 uint32 切片。
-func (f facade) Uint32s(values []string) (result []uint32) {
+func (f strto) Uint32s(values []string) (result []uint32) {
 	for _, value := range values {
 		result = append(result, f.Uint32(value))
 	}
@@ -33,7 +33,7 @@ func (f facade) Uint32s(values []string) (result []uint32) {
 }
 
 // Uint64s 将字符串切片转换为 uint64 切片。
-func (f facade) Uint64s(values []string) (result []uint64) {
+func (f strto) Uint64s(values []string) (result []uint64) {
 	for _, value := range values {
 		result = append(result, f.Uint64(value))
 	}

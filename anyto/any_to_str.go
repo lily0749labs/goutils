@@ -7,7 +7,7 @@ import (
 )
 
 // String 将任意类型数据转换为 string。
-func (facade) String(i any) string {
+func (anyto) String(i any) string {
 	if i == nil {
 		return ""
 	}

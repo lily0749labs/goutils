@@ -3,7 +3,7 @@ package valid
 import "regexp"
 
 // PostalCode 验证是否为邮编号码。
-func (facade) PostalCode(str string) bool {
+func (valid) PostalCode(str string) bool {
 	reg := regexp.MustCompile(`^[1-9]\d{5}$`)
 	return reg.MatchString(str)
 }

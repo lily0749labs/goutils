@@ -5,7 +5,7 @@ import (
 )
 
 // Number 验证是否全部为数字。
-func (facade) Number(input string) bool {
+func (valid) Number(input string) bool {
 	reg := regexp.MustCompile("^[0-9]+$")
 	return reg.MatchString(input)
 }

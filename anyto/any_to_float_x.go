@@ -7,7 +7,7 @@ import (
 )
 
 // Float32 将给定的值转换为 float32。
-func (f facade) Float32(i any) (float32, error) {
+func (f anyto) Float32(i any) (float32, error) {
 	f64, err := f.Float64(i)
 	if err != nil {
 		return 0, err
@@ -19,7 +19,7 @@ func (f facade) Float32(i any) (float32, error) {
 }
 
 // Float64 将给定的值转换为 float64。
-func (facade) Float64(i any) (float64, error) {
+func (anyto) Float64(i any) (float64, error) {
 	if i == nil {
 		return 0, nil
 	}

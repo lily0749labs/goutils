@@ -1,7 +1,7 @@
 package strto
 
 // Bools 将字符串切片转换为 bool 切片。
-func (f facade) Bools(values []string) (result []bool) {
+func (f strto) Bools(values []string) (result []bool) {
 	for _, value := range values {
 		result = append(result, f.Bool(value))
 	}

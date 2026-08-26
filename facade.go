@@ -1,29 +1,32 @@
-// Package goutils provides facade-style access to the utility subpackages.
+// Package goutils 提供各工具子包的统一门面入口。
 package goutils
 
 import (
-	anyutil "github.com/lily0749labs/goutils/anyto"
-	cryptoutil "github.com/lily0749labs/goutils/crypto"
-	idutil "github.com/lily0749labs/goutils/id"
-	randutil "github.com/lily0749labs/goutils/rand"
-	strutil "github.com/lily0749labs/goutils/strto"
-	timeutil "github.com/lily0749labs/goutils/time"
-	validutil "github.com/lily0749labs/goutils/valid"
+	anyutil "github.com/lily-study-utils/goutils/anyto"
+	cryptoutil "github.com/lily-study-utils/goutils/crypto"
+	idutil "github.com/lily-study-utils/goutils/id"
+	randutil "github.com/lily-study-utils/goutils/rand"
+	stringutil "github.com/lily-study-utils/goutils/stringutil"
+	strutil "github.com/lily-study-utils/goutils/strto"
+	timeutil "github.com/lily-study-utils/goutils/time"
+	validutil "github.com/lily-study-utils/goutils/valid"
 )
 
 var (
-	// AnyTo provides facade-style access to the any-value conversion utilities.
+	// AnyTo 提供任意值转换工具。
 	AnyTo = anyutil.AnyTo
-	// Crypto provides facade-style access to the cryptography utilities.
+	// Crypto 提供哈希、加密和解密工具。
 	Crypto = cryptoutil.Crypto
-	// ID provides facade-style access to the ID generation utilities.
+	// ID 提供 UUID 和雪花 ID 生成工具。
 	ID = idutil.ID
-	// Rand provides facade-style access to the random utilities.
+	// Rand 提供随机数、随机字符串和随机姓名工具。
 	Rand = randutil.Rand
-	// StrTo provides facade-style access to the string conversion utilities.
+	// StrTo 提供字符串类型转换工具。
 	StrTo = strutil.StrTo
-	// Time provides facade-style access to the time utilities.
+	// String 提供 Unicode 安全的字符串处理工具。
+	String = stringutil.String
+	// Time 提供日期和时间处理工具。
 	Time = timeutil.Time
-	// Valid provides facade-style access to the validation utilities.
+	// Valid 提供常见数据格式校验工具。
 	Valid = validutil.Valid
 )

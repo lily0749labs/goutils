@@ -3,7 +3,7 @@ package id
 import uuid "github.com/satori/go.uuid"
 
 // Token 生成 UUID 格式的令牌。
-func (facade) Token() string {
+func (id) Token() string {
 	return uuid.NewV4().String()
 }
 

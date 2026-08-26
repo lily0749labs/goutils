@@ -9,19 +9,19 @@ import (
 )
 
 // HashSHA256 返回 str 的 SHA-256 摘要。
-func (facade) HashSHA256(str string) string {
+func (crypto) HashSHA256(str string) string {
 	hash := sha256.Sum256([]byte(str))
 	return hex.EncodeToString(hash[:])
 }
 
 // BcryptHash 使用 bcrypt 对密码进行加密。
-func (f facade) BcryptHash(password string) string {
+func (f crypto) BcryptHash(password string) string {
 	hash, _ := f.BcryptHashWithError(password)
 	return hash
 }
 
 // BcryptHashWithError 使用 bcrypt 对密码进行加密，并返回输入或加密错误。
-func (facade) BcryptHashWithError(password string) (string, error) {
+func (crypto) BcryptHashWithError(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return "", err
@@ -30,13 +30,13 @@ func (facade) BcryptHashWithError(password string) (string, error) {
 }
 
 // BcryptCheck 对比明文密码和数据库的哈希值。
-func (facade) BcryptCheck(password, hash string) bool {
+func (crypto) BcryptCheck(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
 
 // MD5V 返回字节切片的十六进制 MD5 摘要，并允许在摘要前附加字节。
-func (facade) MD5V(str []byte, b ...byte) string {
+func (crypto) MD5V(str []byte, b ...byte) string {
 	h := md5.New()
 	h.Write(str)
 	return hex.EncodeToString(h.Sum(b))

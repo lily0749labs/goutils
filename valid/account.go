@@ -6,7 +6,7 @@ import (
 )
 
 // Email 验证是否为电子邮箱地址。
-func (facade) Email(input string) bool {
+func (valid) Email(input string) bool {
 	// 定义邮箱地址的正则表达式
 	pattern := `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
 	match, err := regexp.MatchString(pattern, input)
@@ -14,25 +14,25 @@ func (facade) Email(input string) bool {
 }
 
 // JSON 验证是否为 JSON。
-func (facade) JSON(input string) bool {
+func (valid) JSON(input string) bool {
 	var js json.RawMessage
 	return json.Unmarshal([]byte(input), &js) == nil
 }
 
 // QQ 验证是否为 QQ 号。
-func (facade) QQ(qq string) bool {
+func (valid) QQ(qq string) bool {
 	match, _ := regexp.MatchString(`^[1-9][0-9]{4,12}$`, qq)
 	return match
 }
 
 // WeChat 验证是否为微信号。
-func (facade) WeChat(wechat string) bool {
+func (valid) WeChat(wechat string) bool {
 	match, _ := regexp.MatchString(`^[a-zA-Z][-_a-zA-Z0-9]{6,20}$`, wechat)
 	return match
 }
 
 // Weibo 验证是否为微博 ID。
-func (facade) Weibo(weibo string) bool {
+func (valid) Weibo(weibo string) bool {
 	if len(weibo) < 6 || len(weibo) > 20 {
 		return false
 	}
@@ -46,7 +46,7 @@ func (facade) Weibo(weibo string) bool {
 
 // Password 验证密码是否合法。
 // 密码长度在6-20个字符之间，必须包含数字、字母和特殊符号
-func (facade) Password(password string) bool {
+func (valid) Password(password string) bool {
 	if len(password) < 6 || len(password) > 20 {
 		return false
 	}
