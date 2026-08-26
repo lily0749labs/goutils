@@ -62,6 +62,40 @@ func (floatutil) Mul(first, second float64) float64 {
 	return result
 }
 
+// Divide 使用十进制定点运算完成除法并按 precision 四舍五入。
+// precision 默认是 2；dividend 或 divisor 为零时返回 0，以兼容原项目行为。
+func (floatutil) Divide(dividend, divisor float64, precision ...int32) float64 {
+	if dividend == 0 || divisor == 0 {
+		return 0
+	}
+	result, _ := decimal.NewFromFloat(dividend).
+		Div(decimal.NewFromFloat(divisor)).
+		Round(decimalPrecision(precision)).
+		Float64()
+	return result
+}
+
+// Round 使用十进制定点运算将 value 四舍五入到 precision 位小数。
+// precision 默认是 2。
+func (floatutil) Round(value float64, precision ...int32) float64 {
+	result, _ := decimal.NewFromFloat(value).Round(decimalPrecision(precision)).Float64()
+	return result
+}
+
+// RoundInt64 使用十进制定点运算将整数按 precision 四舍五入并返回 float64。
+// precision 默认是 2。
+func (floatutil) RoundInt64(value int64, precision ...int32) float64 {
+	result, _ := decimal.NewFromInt(value).Round(decimalPrecision(precision)).Float64()
+	return result
+}
+
+func decimalPrecision(precision []int32) int32 {
+	if len(precision) > 0 {
+		return precision[0]
+	}
+	return 2
+}
+
 // Truncate 是 Float.Truncate 的包级便捷入口。
 func Truncate(value float64, precision int) float64 {
 	return Float.Truncate(value, precision)
@@ -80,4 +114,19 @@ func Add(first, second float64) float64 {
 // Mul 是 Float.Mul 的包级便捷入口。
 func Mul(first, second float64) float64 {
 	return Float.Mul(first, second)
+}
+
+// Divide 是 Float.Divide 的包级便捷入口。
+func Divide(dividend, divisor float64, precision ...int32) float64 {
+	return Float.Divide(dividend, divisor, precision...)
+}
+
+// Round 是 Float.Round 的包级便捷入口。
+func Round(value float64, precision ...int32) float64 {
+	return Float.Round(value, precision...)
+}
+
+// RoundInt64 是 Float.RoundInt64 的包级便捷入口。
+func RoundInt64(value int64, precision ...int32) float64 {
+	return Float.RoundInt64(value, precision...)
 }

@@ -1,5 +1,10 @@
 package maps
 
+import (
+	"cmp"
+	"slices"
+)
+
 // Keys 返回 Map 的全部键。Go Map 无固定迭代顺序，因此结果顺序不稳定。
 func Keys[K comparable, V any](values map[K]V) []K {
 	if values == nil {
@@ -9,6 +14,13 @@ func Keys[K comparable, V any](values map[K]V) []K {
 	for key := range values {
 		result = append(result, key)
 	}
+	return result
+}
+
+// SortedKeys 返回 Map 的全部键并按升序排列。
+func SortedKeys[K cmp.Ordered, V any](values map[K]V) []K {
+	result := Keys(values)
+	slices.Sort(result)
 	return result
 }
 

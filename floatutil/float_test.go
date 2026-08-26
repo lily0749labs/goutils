@@ -78,6 +78,24 @@ func TestDecimalArithmetic(t *testing.T) {
 	if got := Float.Mul(0.1, 0.2); got != 0.02 {
 		t.Fatalf("Float.Mul(0.1, 0.2) = %v, want 0.02", got)
 	}
+	if got := Float.Divide(1, 3); got != 0.33 {
+		t.Fatalf("Float.Divide(1, 3) = %v, want 0.33", got)
+	}
+	if got := Float.Divide(2, 3, 3); got != 0.667 {
+		t.Fatalf("Float.Divide(2, 3, 3) = %v, want 0.667", got)
+	}
+	if got := Float.Divide(1, 0); got != 0 {
+		t.Fatalf("Float.Divide(1, 0) = %v, want 0", got)
+	}
+	if got := Float.Round(1.235); got != 1.24 {
+		t.Fatalf("Float.Round(1.235) = %v, want 1.24", got)
+	}
+	if got := Float.Round(125, -1); got != 130 {
+		t.Fatalf("Float.Round(125, -1) = %v, want 130", got)
+	}
+	if got := Float.RoundInt64(125, -1); got != 130 {
+		t.Fatalf("Float.RoundInt64(125, -1) = %v, want 130", got)
+	}
 }
 
 func TestTruncateMatchesLegacyBehavior(t *testing.T) {

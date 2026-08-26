@@ -17,6 +17,9 @@ func TestGenericMapFunctions(t *testing.T) {
 	if !reflect.DeepEqual(keys, []string{"a", "b", "c"}) {
 		t.Fatalf("Keys() = %v", keys)
 	}
+	if got := SortedKeys(values); !reflect.DeepEqual(got, []string{"a", "b", "c"}) {
+		t.Fatalf("SortedKeys() = %v", got)
+	}
 	items := Values(values)
 	sort.Ints(items)
 	if !reflect.DeepEqual(items, []int{1, 2, 3}) {
@@ -66,6 +69,9 @@ func TestMapNilBehavior(t *testing.T) {
 	t.Parallel()
 	if Keys[string, int](nil) != nil || Values[string, int](nil) != nil || Clone[string, int](nil) != nil {
 		t.Fatal("nil Map 应返回 nil")
+	}
+	if SortedKeys[string, int](nil) != nil {
+		t.Fatal("nil Map 的 SortedKeys() 应返回 nil")
 	}
 	if Merge[string, int]() != nil || Filter[string, int](nil, nil) != nil || MapValues[string, int, string](nil, nil) != nil {
 		t.Fatal("nil 输入应返回 nil")
