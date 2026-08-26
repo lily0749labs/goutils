@@ -20,7 +20,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/lily-study-utils/goutils"
+	"github.com/lily0749labs/goutils"
 )
 
 func main() {

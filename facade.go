@@ -2,14 +2,14 @@
 package goutils
 
 import (
-	anyutil "github.com/lily-study-utils/goutils/anyto"
-	cryptoutil "github.com/lily-study-utils/goutils/crypto"
-	idutil "github.com/lily-study-utils/goutils/id"
-	randutil "github.com/lily-study-utils/goutils/rand"
-	stringutil "github.com/lily-study-utils/goutils/stringutil"
-	strutil "github.com/lily-study-utils/goutils/strto"
-	validutil "github.com/lily-study-utils/goutils/valid"
+	anyutil "github.com/lily0749labs/goutils/anyto"
+	cryptoutil "github.com/lily0749labs/goutils/crypto"
+	idutil "github.com/lily0749labs/goutils/id"
+	randutil "github.com/lily0749labs/goutils/rand"
+	stringutil "github.com/lily0749labs/goutils/stringutil"
+	strutil "github.com/lily0749labs/goutils/strto"
 	timeutil "github.com/lily0749labs/goutils/time"
+	validutil "github.com/lily0749labs/goutils/valid"
 )
 
 var (
