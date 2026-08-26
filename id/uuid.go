@@ -2,7 +2,11 @@ package id
 
 import uuid "github.com/satori/go.uuid"
 
-// GetToken 生成 UUID 格式的令牌。
-func GetToken() string {
+// Token 生成 UUID 格式的令牌。
+func (facade) Token() string {
 	return uuid.NewV4().String()
 }
+
+// GetToken 生成 UUID 格式的令牌。
+// Deprecated: 使用 ID.Token。
+func GetToken() string { return ID.Token() }

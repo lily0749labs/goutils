@@ -31,11 +31,12 @@ import (
 
 func main() {
 	fmt.Println(goutils.Time.NowTime())
-	fmt.Println(goutils.StrTo.StrToInt("123"))
-	fmt.Println(goutils.Valid.IsEmail("test@example.com"))
+	fmt.Println(goutils.AnyTo.Int("123"))
+	fmt.Println(goutils.StrTo.Int("123"))
+	fmt.Println(goutils.Valid.Email("test@example.com"))
 	fmt.Println(goutils.Crypto.MD5("hello"))
 	fmt.Println(goutils.Rand.Rand6())
-	fmt.Println(goutils.ID.GetToken())
+	fmt.Println(goutils.ID.Token())
 }
 ```
 
@@ -49,7 +50,8 @@ func main() {
 - `goutils.ID`
 - `goutils.Time`
 
-也可以继续直接导入 `github.com/lily0749labs/goutils/time` 等子包使用原有函数。
+各子包的结构体方法承载实际实现；原有包级函数作为兼容入口保留。例如，
+`anyto.AnyToInt("123")` 仍然可用，但新代码推荐使用 `goutils.AnyTo.Int("123")`。
 
 ## 发布前检查
 

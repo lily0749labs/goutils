@@ -1,9 +1,13 @@
 package strto
 
-// ArrStrToBool []string转[]bool
-func ArrStrToBool(arrv []string) (r []bool) {
-	for _, v := range arrv {
-		r = append(r, StrToBool(v))
+// Bools 将字符串切片转换为 bool 切片。
+func (f facade) Bools(values []string) (result []bool) {
+	for _, value := range values {
+		result = append(result, f.Bool(value))
 	}
-	return
+	return result
 }
+
+// ArrStrToBool 将字符串切片转换为 bool 切片。
+// Deprecated: 使用 StrTo.Bools。
+func ArrStrToBool(values []string) []bool { return StrTo.Bools(values) }

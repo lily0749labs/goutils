@@ -18,7 +18,7 @@ type AESEncryptor struct{}
 // Deprecated: 请使用 AESEncryptor。
 type AesEncrypt = AESEncryptor
 
-func (e *AESEncryptor) getKey(strKey string) ([]byte, error) {
+func (facade) getAESKey(strKey string) ([]byte, error) {
 	arrKey := []byte(strKey)
 	keyLen := len(arrKey)
 	if keyLen < 16 {
@@ -36,9 +36,9 @@ func (e *AESEncryptor) getKey(strKey string) ([]byte, error) {
 	return arrKey[:16], nil
 }
 
-// Encrypt 使用 strKey 加密 strMesg。
-func (e *AESEncryptor) Encrypt(strKey, strMesg string) ([]byte, error) {
-	key, err := e.getKey(strKey)
+// Encrypt 使用 AES 加密 strMesg。
+func (f facade) Encrypt(strKey, strMesg string) ([]byte, error) {
+	key, err := f.getAESKey(strKey)
 	if err != nil {
 		return nil, err
 	}
@@ -53,9 +53,9 @@ func (e *AESEncryptor) Encrypt(strKey, strMesg string) ([]byte, error) {
 	return encrypted, nil
 }
 
-// Decrypt 使用 strKey 解密 src。
-func (e *AESEncryptor) Decrypt(strKey string, src []byte) ([]byte, error) {
-	key, err := e.getKey(strKey)
+// Decrypt 使用 AES 解密 src。
+func (f facade) Decrypt(strKey string, src []byte) ([]byte, error) {
+	key, err := f.getAESKey(strKey)
 	if err != nil {
 		return nil, err
 	}
@@ -68,4 +68,16 @@ func (e *AESEncryptor) Decrypt(strKey string, src []byte) ([]byte, error) {
 	aesDecrypter := cipher.NewCFBDecrypter(aesBlockDecrypter, iv)
 	aesDecrypter.XORKeyStream(decrypted, src)
 	return decrypted, nil
+}
+
+// Encrypt 使用 strKey 加密 strMesg。
+// Deprecated: 使用 Crypto.Encrypt。
+func (*AESEncryptor) Encrypt(strKey, strMesg string) ([]byte, error) {
+	return Crypto.Encrypt(strKey, strMesg)
+}
+
+// Decrypt 使用 strKey 解密 src。
+// Deprecated: 使用 Crypto.Decrypt。
+func (*AESEncryptor) Decrypt(strKey string, src []byte) ([]byte, error) {
+	return Crypto.Decrypt(strKey, src)
 }

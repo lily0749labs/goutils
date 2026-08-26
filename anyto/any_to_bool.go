@@ -2,8 +2,8 @@ package anyto
 
 import "reflect"
 
-// AnyToBool 将给定的值转换为bool
-func AnyToBool(i any) bool {
+// Bool 将给定的值转换为 bool。
+func (facade) Bool(i any) bool {
 	if i == nil {
 		return false
 	}
@@ -40,3 +40,7 @@ func AnyToBool(i any) bool {
 		return false
 	}
 }
+
+// AnyToBool 将给定的值转换为 bool。
+// Deprecated: 使用 AnyTo.Bool。
+func AnyToBool(i any) bool { return AnyTo.Bool(i) }

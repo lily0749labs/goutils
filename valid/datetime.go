@@ -6,14 +6,14 @@ import (
 	"strings"
 )
 
-// IsTime 验证是否为时间格式（HH:mm:ss）
-func IsTime(str string) bool {
+// Time 验证是否为时间格式（HH:mm:ss）。
+func (facade) Time(str string) bool {
 	reg := regexp.MustCompile(`^(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d$`)
 	return reg.MatchString(str)
 }
 
-// IsDate 验证是否为日期格式（YYYY-MM-DD）
-func IsDate(str string) bool {
+// Date 验证是否为日期格式（YYYY-MM-DD）。
+func (facade) Date(str string) bool {
 	reg := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
 	if !reg.MatchString(str) {
 		return false
@@ -52,14 +52,23 @@ func isValidDay(day, month, year int) bool {
 	}
 }
 
-// IsDateTime 验证是否为日期时间格式（yyyy-MM-dd HH:mm:ss）
-func IsDateTime(str string) bool {
+// DateTime 验证是否为日期时间格式（yyyy-MM-dd HH:mm:ss）。
+func (f facade) DateTime(str string) bool {
 	reg := regexp.MustCompile(`^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$`)
 	if !reg.MatchString(str) {
 		return false
 	}
-	if !IsDate(str[0:10]) || !IsTime(str[11:]) {
+	if !f.Date(str[0:10]) || !f.Time(str[11:]) {
 		return false
 	}
 	return true
 }
+
+// Deprecated: 使用 Valid.Time。
+func IsTime(str string) bool { return Valid.Time(str) }
+
+// Deprecated: 使用 Valid.Date。
+func IsDate(str string) bool { return Valid.Date(str) }
+
+// Deprecated: 使用 Valid.DateTime。
+func IsDateTime(str string) bool { return Valid.DateTime(str) }

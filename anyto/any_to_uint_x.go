@@ -6,9 +6,9 @@ import (
 	"strconv"
 )
 
-// AnyToUint 将给定的值转换为 uint
-func AnyToUint(i any) (uint, error) {
-	v, err := AnyToUint64(i)
+// Uint 将给定的值转换为 uint。
+func (f facade) Uint(i any) (uint, error) {
+	v, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -21,9 +21,9 @@ func AnyToUint(i any) (uint, error) {
 	return uint(v), nil
 }
 
-// AnyToUint8 将给定的值转换为 uint8
-func AnyToUint8(i any) (uint8, error) {
-	value, err := AnyToUint64(i)
+// Uint8 将给定的值转换为 uint8。
+func (f facade) Uint8(i any) (uint8, error) {
+	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -33,9 +33,9 @@ func AnyToUint8(i any) (uint8, error) {
 	return uint8(value), nil
 }
 
-// AnyToUint16 将给定的值转换为 uint16
-func AnyToUint16(i any) (uint16, error) {
-	value, err := AnyToUint64(i)
+// Uint16 将给定的值转换为 uint16。
+func (f facade) Uint16(i any) (uint16, error) {
+	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -45,9 +45,9 @@ func AnyToUint16(i any) (uint16, error) {
 	return uint16(value), nil
 }
 
-// AnyToUint32 将给定的值转换为 uint32
-func AnyToUint32(i any) (uint32, error) {
-	value, err := AnyToUint64(i)
+// Uint32 将给定的值转换为 uint32。
+func (f facade) Uint32(i any) (uint32, error) {
+	value, err := f.Uint64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -57,8 +57,8 @@ func AnyToUint32(i any) (uint32, error) {
 	return uint32(value), nil
 }
 
-// AnyToUint64 将给定的值转换为 uint64
-func AnyToUint64(i any) (uint64, error) {
+// Uint64 将给定的值转换为 uint64。
+func (facade) Uint64(i any) (uint64, error) {
 	if i == nil {
 		return 0, nil
 	}
@@ -114,3 +114,23 @@ func AnyToUint64(i any) (uint64, error) {
 		return 0, ErrType
 	}
 }
+
+// AnyToUint 将给定的值转换为 uint。
+// Deprecated: 使用 AnyTo.Uint。
+func AnyToUint(i any) (uint, error) { return AnyTo.Uint(i) }
+
+// AnyToUint8 将给定的值转换为 uint8。
+// Deprecated: 使用 AnyTo.Uint8。
+func AnyToUint8(i any) (uint8, error) { return AnyTo.Uint8(i) }
+
+// AnyToUint16 将给定的值转换为 uint16。
+// Deprecated: 使用 AnyTo.Uint16。
+func AnyToUint16(i any) (uint16, error) { return AnyTo.Uint16(i) }
+
+// AnyToUint32 将给定的值转换为 uint32。
+// Deprecated: 使用 AnyTo.Uint32。
+func AnyToUint32(i any) (uint32, error) { return AnyTo.Uint32(i) }
+
+// AnyToUint64 将给定的值转换为 uint64。
+// Deprecated: 使用 AnyTo.Uint64。
+func AnyToUint64(i any) (uint64, error) { return AnyTo.Uint64(i) }

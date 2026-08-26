@@ -8,8 +8,8 @@ import (
 	"fmt"
 )
 
-// GenerateRSAKeys 生成RSA私钥和公钥
-func GenerateRSAKeys() (string, string, error) {
+// GenerateRSAKeys 生成 RSA 私钥和公钥。
+func (facade) GenerateRSAKeys() (string, string, error) {
 	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
 		return "", "", err
@@ -37,8 +37,8 @@ func GenerateRSAKeys() (string, string, error) {
 	return string(privateKeyPEM), string(publicKeyPEM), nil
 }
 
-// EncryptRSA RSA加密数据
-func EncryptRSA(publicKeyStr string, message []byte) ([]byte, error) {
+// EncryptRSA 使用 RSA 公钥加密数据。
+func (facade) EncryptRSA(publicKeyStr string, message []byte) ([]byte, error) {
 	// 解码公钥
 	publicKeyBlock, _ := pem.Decode([]byte(publicKeyStr))
 	if publicKeyBlock == nil {
@@ -66,8 +66,8 @@ func EncryptRSA(publicKeyStr string, message []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
-// DecryptRSA RSA解密数据
-func DecryptRSA(privateKeyStr string, ciphertext []byte) ([]byte, error) {
+// DecryptRSA 使用 RSA 私钥解密数据。
+func (facade) DecryptRSA(privateKeyStr string, ciphertext []byte) ([]byte, error) {
 	// 解码私钥
 	privateKeyBlock, _ := pem.Decode([]byte(privateKeyStr))
 	if privateKeyBlock == nil {
@@ -87,4 +87,17 @@ func DecryptRSA(privateKeyStr string, ciphertext []byte) ([]byte, error) {
 	}
 
 	return plaintext, nil
+}
+
+// Deprecated: 使用 Crypto.GenerateRSAKeys。
+func GenerateRSAKeys() (string, string, error) { return Crypto.GenerateRSAKeys() }
+
+// Deprecated: 使用 Crypto.EncryptRSA。
+func EncryptRSA(publicKeyStr string, message []byte) ([]byte, error) {
+	return Crypto.EncryptRSA(publicKeyStr, message)
+}
+
+// Deprecated: 使用 Crypto.DecryptRSA。
+func DecryptRSA(privateKeyStr string, ciphertext []byte) ([]byte, error) {
+	return Crypto.DecryptRSA(privateKeyStr, ciphertext)
 }

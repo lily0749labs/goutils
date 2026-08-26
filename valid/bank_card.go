@@ -1,7 +1,7 @@
 package valid
 
-// IsBankCardNo 验证是否为大陆银行卡号
-func IsBankCardNo(cardNumber string) bool {
+// BankCardNo 验证是否为大陆银行卡号。
+func (facade) BankCardNo(cardNumber string) bool {
 	if len(cardNumber) != 16 && len(cardNumber) != 19 {
 		return false
 	}
@@ -38,3 +38,7 @@ func IsBankCardNo(cardNumber string) bool {
 		return sum%10 == 0
 	}
 }
+
+// IsBankCardNo 验证是否为大陆银行卡号。
+// Deprecated: 使用 Valid.BankCardNo。
+func IsBankCardNo(cardNumber string) bool { return Valid.BankCardNo(cardNumber) }

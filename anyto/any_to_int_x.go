@@ -6,9 +6,9 @@ import (
 	"strconv"
 )
 
-// AnyToInt 将给定的值转换为 int
-func AnyToInt(i any) (int, error) {
-	v, err := AnyToInt64(i)
+// Int 将给定的值转换为 int。
+func (f facade) Int(i any) (int, error) {
+	v, err := f.Int64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -21,9 +21,9 @@ func AnyToInt(i any) (int, error) {
 	return int(v), nil
 }
 
-// AnyToInt8 将给定的值转换为 int8
-func AnyToInt8(i any) (int8, error) {
-	value, err := AnyToInt64(i)
+// Int8 将给定的值转换为 int8。
+func (f facade) Int8(i any) (int8, error) {
+	value, err := f.Int64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -33,9 +33,9 @@ func AnyToInt8(i any) (int8, error) {
 	return int8(value), nil
 }
 
-// AnyToInt16 将给定的值转换为 int16
-func AnyToInt16(i any) (int16, error) {
-	value, err := AnyToInt64(i)
+// Int16 将给定的值转换为 int16。
+func (f facade) Int16(i any) (int16, error) {
+	value, err := f.Int64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -45,9 +45,9 @@ func AnyToInt16(i any) (int16, error) {
 	return int16(value), nil
 }
 
-// AnyToInt32 将给定的值转换为 int32
-func AnyToInt32(i any) (int32, error) {
-	value, err := AnyToInt64(i)
+// Int32 将给定的值转换为 int32。
+func (f facade) Int32(i any) (int32, error) {
+	value, err := f.Int64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -57,8 +57,8 @@ func AnyToInt32(i any) (int32, error) {
 	return int32(value), nil
 }
 
-// AnyToInt64 将给定的值转换为 int64
-func AnyToInt64(i any) (int64, error) {
+// Int64 将给定的值转换为 int64。
+func (facade) Int64(i any) (int64, error) {
 	if i == nil {
 		return 0, nil
 	}
@@ -107,3 +107,23 @@ func AnyToInt64(i any) (int64, error) {
 		return 0, ErrType
 	}
 }
+
+// AnyToInt 将给定的值转换为 int。
+// Deprecated: 使用 AnyTo.Int。
+func AnyToInt(i any) (int, error) { return AnyTo.Int(i) }
+
+// AnyToInt8 将给定的值转换为 int8。
+// Deprecated: 使用 AnyTo.Int8。
+func AnyToInt8(i any) (int8, error) { return AnyTo.Int8(i) }
+
+// AnyToInt16 将给定的值转换为 int16。
+// Deprecated: 使用 AnyTo.Int16。
+func AnyToInt16(i any) (int16, error) { return AnyTo.Int16(i) }
+
+// AnyToInt32 将给定的值转换为 int32。
+// Deprecated: 使用 AnyTo.Int32。
+func AnyToInt32(i any) (int32, error) { return AnyTo.Int32(i) }
+
+// AnyToInt64 将给定的值转换为 int64。
+// Deprecated: 使用 AnyTo.Int64。
+func AnyToInt64(i any) (int64, error) { return AnyTo.Int64(i) }

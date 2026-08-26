@@ -6,8 +6,8 @@ import (
 	"strconv"
 )
 
-// AnyToStr 任意类型数据转string
-func AnyToStr(i any) string {
+// String 将任意类型数据转换为 string。
+func (facade) String(i any) string {
 	if i == nil {
 		return ""
 	}
@@ -41,3 +41,7 @@ func AnyToStr(i any) string {
 		return ""
 	}
 }
+
+// AnyToStr 将任意类型数据转换为 string。
+// Deprecated: 使用 AnyTo.String。
+func AnyToStr(i any) string { return AnyTo.String(i) }

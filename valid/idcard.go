@@ -5,19 +5,19 @@ import (
 	"strconv"
 )
 
-// IsIDCard 验证身份证号(18或15位)
-func IsIDCard(str string) bool {
+// IDCard 验证身份证号（18 或 15 位）。
+func (f facade) IDCard(str string) bool {
 	if len(str) != 15 && len(str) != 18 {
 		return false
 	}
 	if len(str) == 18 {
-		return IsIDCard18(str)
+		return f.IDCard18(str)
 	}
-	return IsIDCard15(str)
+	return f.IDCard15(str)
 }
 
-// IsIDCard18 验证18位身份证号
-func IsIDCard18(id string) bool {
+// IDCard18 验证 18 位身份证号。
+func (facade) IDCard18(id string) bool {
 	regExp := "^[1-9]\\d{5}(19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$"
 	if match, _ := regexp.MatchString(regExp, id); !match {
 		return false
@@ -76,8 +76,8 @@ func IsIDCard18(id string) bool {
 	return checkCodeMap[checkCode] == strconv.Itoa(lastNum)
 }
 
-// IsIDCard15 验证15位身份证号
-func IsIDCard15(idCard string) bool {
+// IDCard15 验证 15 位身份证号。
+func (facade) IDCard15(idCard string) bool {
 	// 验证是否为15位数字
 	if match, _ := regexp.MatchString(`^\d{15}$`, idCard); !match {
 		return false
@@ -99,3 +99,12 @@ func IsIDCard15(idCard string) bool {
 
 	return true
 }
+
+// Deprecated: 使用 Valid.IDCard。
+func IsIDCard(str string) bool { return Valid.IDCard(str) }
+
+// Deprecated: 使用 Valid.IDCard18。
+func IsIDCard18(id string) bool { return Valid.IDCard18(id) }
+
+// Deprecated: 使用 Valid.IDCard15。
+func IsIDCard15(idCard string) bool { return Valid.IDCard15(idCard) }

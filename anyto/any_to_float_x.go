@@ -6,9 +6,9 @@ import (
 	"strconv"
 )
 
-// AnyToFloat32 将给定的值转换为float32
-func AnyToFloat32(i any) (float32, error) {
-	f64, err := AnyToFloat64(i)
+// Float32 将给定的值转换为 float32。
+func (f facade) Float32(i any) (float32, error) {
+	f64, err := f.Float64(i)
 	if err != nil {
 		return 0, err
 	}
@@ -18,8 +18,8 @@ func AnyToFloat32(i any) (float32, error) {
 	return float32(f64), nil
 }
 
-// AnyToFloat64 将给定的值转换为float64
-func AnyToFloat64(i any) (float64, error) {
+// Float64 将给定的值转换为 float64。
+func (facade) Float64(i any) (float64, error) {
 	if i == nil {
 		return 0, nil
 	}
@@ -56,3 +56,11 @@ func AnyToFloat64(i any) (float64, error) {
 		return 0, ErrType
 	}
 }
+
+// AnyToFloat32 将给定的值转换为 float32。
+// Deprecated: 使用 AnyTo.Float32。
+func AnyToFloat32(i any) (float32, error) { return AnyTo.Float32(i) }
+
+// AnyToFloat64 将给定的值转换为 float64。
+// Deprecated: 使用 AnyTo.Float64。
+func AnyToFloat64(i any) (float64, error) { return AnyTo.Float64(i) }

@@ -6,6 +6,9 @@ import (
 )
 
 var (
+	// AnyTo 提供任意值转换的结构化入口。
+	AnyTo = facade{}
+
 	// ErrSyntax 表示值不符合目标类型要求的语法。
 	ErrSyntax = strconv.ErrSyntax
 
@@ -18,3 +21,5 @@ var (
 	// ErrUnsignedInt 表示负数无法转换为无符号整数。
 	ErrUnsignedInt = errors.New("cannot convert negative value to unsigned integer")
 )
+
+type facade struct{}
