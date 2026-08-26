@@ -26,17 +26,30 @@ package main
 import (
 	"fmt"
 
-	"github.com/lily0749labs/goutils/anyto"
+	"github.com/lily0749labs/goutils"
 )
 
 func main() {
-	value, err := anyto.AnyToInt("123")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(value)
+	fmt.Println(goutils.Time.NowTime())
+	fmt.Println(goutils.StrTo.StrToInt("123"))
+	fmt.Println(goutils.Valid.IsEmail("test@example.com"))
+	fmt.Println(goutils.Crypto.MD5("hello"))
+	fmt.Println(goutils.Rand.Rand6())
+	fmt.Println(goutils.ID.GetToken())
 }
 ```
+
+根包提供以下门面入口：
+
+- `goutils.AnyTo`
+- `goutils.StrTo`
+- `goutils.Valid`
+- `goutils.Crypto`
+- `goutils.Rand`
+- `goutils.ID`
+- `goutils.Time`
+
+也可以继续直接导入 `github.com/lily0749labs/goutils/time` 等子包使用原有函数。
 
 ## 发布前检查
 
