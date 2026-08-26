@@ -9,6 +9,12 @@ import (
 func TestNewFacades(t *testing.T) {
 	t.Parallel()
 
+	if got := goutils.Float.Truncate(1.239, 2); got != 1.23 {
+		t.Fatalf("Float.Truncate() = %v, want 1.23", got)
+	}
+	if got := goutils.Sync.MapLen(nil); got != 0 {
+		t.Fatalf("Sync.MapLen(nil) = %d, want 0", got)
+	}
 	if got := goutils.Money.FormatCents(-1); got != "-0.01" {
 		t.Fatalf("Money.FormatCents() = %q, want -0.01", got)
 	}

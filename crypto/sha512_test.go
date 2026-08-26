@@ -1,0 +1,12 @@
+package crypto
+
+import "testing"
+
+func TestSHA512(t *testing.T) {
+	t.Parallel()
+
+	const want = "ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f"
+	if got := Crypto.SHA512("abc"); got != want {
+		t.Fatalf("Crypto.SHA512(abc) = %q, want %q", got, want)
+	}
+}
