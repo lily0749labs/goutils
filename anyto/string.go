@@ -1,23 +1,17 @@
 package anyto
 
 import (
-	"fmt"
 	"reflect"
 	"strconv"
 )
 
-// String 将任意类型数据转换为 string。
-func (anyto) String(i any) string {
-	if i == nil {
+// String 将任意标量宽松转换为 string，不返回转换错误。
+// 支持字符串、整数、浮点数、复数、布尔值以及它们的多级指针；
+// nil、nil 指针和不支持类型返回空字符串。需要区分失败和空字符串时请使用 StrictString。
+func (anyto) String(value any) string {
+	v, ok := indirectValue(value)
+	if !ok {
 		return ""
-	}
-
-	v := reflect.ValueOf(i)
-	if v.Kind() == reflect.Ptr {
-		if v.IsNil() {
-			return ""
-		}
-		v = v.Elem()
 	}
 
 	switch v.Kind() {
@@ -32,16 +26,12 @@ func (anyto) String(i any) string {
 	case reflect.Float64:
 		return strconv.FormatFloat(v.Float(), 'f', -1, 64)
 	case reflect.Complex64:
-		return fmt.Sprintf("(%g+%gi)", real(v.Complex()), imag(v.Complex()))
+		return strconv.FormatComplex(v.Complex(), 'g', -1, 64)
 	case reflect.Complex128:
-		return fmt.Sprintf("(%g+%gi)", real(v.Complex()), imag(v.Complex()))
+		return strconv.FormatComplex(v.Complex(), 'g', -1, 128)
 	case reflect.Bool:
 		return strconv.FormatBool(v.Bool())
 	default:
 		return ""
 	}
 }
-
-// AnyToStr 将任意类型数据转换为 string。
-// Deprecated: 使用 AnyTo.String。
-func AnyToStr(i any) string { return AnyTo.String(i) }

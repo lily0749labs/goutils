@@ -2,18 +2,13 @@ package anyto
 
 import "reflect"
 
-// Bool 将给定的值转换为 bool。
-func (anyto) Bool(i any) bool {
-	if i == nil {
+// Bool 将任意标量宽松转换为 bool，不返回转换错误。
+// 数值零、空字符串、精确小写字符串 "false"、nil、nil 指针和不支持类型返回 false；
+// 其他受支持的非零数值或非空字符串返回 true。业务输入校验应使用 StrictBool。
+func (anyto) Bool(value any) bool {
+	v, ok := indirectValue(value)
+	if !ok {
 		return false
-	}
-
-	v := reflect.ValueOf(i)
-	if v.Kind() == reflect.Ptr {
-		if v.IsNil() {
-			return false
-		}
-		v = v.Elem()
 	}
 
 	switch v.Kind() {
@@ -40,7 +35,3 @@ func (anyto) Bool(i any) bool {
 		return false
 	}
 }
-
-// AnyToBool 将给定的值转换为 bool。
-// Deprecated: 使用 AnyTo.Bool。
-func AnyToBool(i any) bool { return AnyTo.Bool(i) }

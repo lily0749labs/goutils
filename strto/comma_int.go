@@ -1,53 +1,63 @@
 package strto
 
-import (
-	"encoding/json"
-	"strconv"
-	"strings"
-)
+import "strings"
 
-// CommaInts 将逗号分隔的字符串转换为 int 切片。
-// 空字段和无法转换的字段会被忽略；空字符串返回 nil。
-func (strto) CommaInts(value string) []int {
+// ParseCommaIntsLoose 从逗号分隔的字段中提取可解析的 int。
+// 它会去除字段两侧空白并忽略空字段、非法整数和溢出值；没有有效整数时返回 nil。
+func (s strto) ParseCommaIntsLoose(value string) []int {
 	if value == "" {
 		return nil
 	}
 	parts := strings.Split(value, ",")
-	var result []int
+	result := make([]int, 0, len(parts))
 	for _, part := range parts {
+		part = strings.TrimSpace(part)
 		if part == "" {
 			continue
 		}
-		item, err := strconv.Atoi(part)
+		item, err := s.ParseInt(part)
 		if err != nil {
 			continue
 		}
 		result = append(result, item)
 	}
+	if len(result) == 0 {
+		return nil
+	}
 	return result
 }
 
-// ParseCommaInts 严格解析逗号分隔的 int 列表。
-// 首尾各允许一个逗号；任何无效字段都会返回错误。
-func (strto) ParseCommaInts(value string) ([]int, error) {
+// ParseCommaInts 解析逗号分隔的 int 列表。
+// 它会去除字段两侧空白并允许首尾各有一个空字段；中间空字段、非法整数和溢出值返回
+// *ElementError。空字符串返回 (nil, nil)。
+func (s strto) ParseCommaInts(value string) ([]int, error) {
 	if value == "" {
 		return nil, nil
 	}
-	value = strings.TrimPrefix(value, ",")
-	value = strings.TrimSuffix(value, ",")
-	var result []int
-	if err := json.Unmarshal([]byte("["+value+"]"), &result); err != nil {
-		return nil, err
+
+	parts := strings.Split(value, ",")
+	if len(parts) > 0 && strings.TrimSpace(parts[0]) == "" {
+		parts = parts[1:]
+	}
+	if len(parts) > 0 && strings.TrimSpace(parts[len(parts)-1]) == "" {
+		parts = parts[:len(parts)-1]
+	}
+	if len(parts) == 0 {
+		return []int{}, nil
+	}
+
+	result := make([]int, len(parts))
+	for index, part := range parts {
+		rawPart := part
+		part = strings.TrimSpace(rawPart)
+		if part == "" {
+			return nil, &ElementError{Index: index, Value: rawPart, Err: ErrSyntax}
+		}
+		parsed, err := s.ParseInt(part)
+		if err != nil {
+			return nil, &ElementError{Index: index, Value: rawPart, Err: err}
+		}
+		result[index] = parsed
 	}
 	return result, nil
-}
-
-// CommaInts 是 StrTo.CommaInts 的包级便捷入口。
-func CommaInts(value string) []int {
-	return StrTo.CommaInts(value)
-}
-
-// ParseCommaInts 是 StrTo.ParseCommaInts 的包级便捷入口。
-func ParseCommaInts(value string) ([]int, error) {
-	return StrTo.ParseCommaInts(value)
 }

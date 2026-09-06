@@ -9,7 +9,7 @@ import (
 	jsonutil "github.com/lily0749labs/goutils/jsonutil"
 	moneyutil "github.com/lily0749labs/goutils/money"
 	randutil "github.com/lily0749labs/goutils/rand"
-	stringutil "github.com/lily0749labs/goutils/stringutil"
+	stringx "github.com/lily0749labs/goutils/stringx"
 	strutil "github.com/lily0749labs/goutils/strto"
 	syncutil "github.com/lily0749labs/goutils/syncutil"
 	timeutil "github.com/lily0749labs/goutils/time"
@@ -34,7 +34,7 @@ var (
 	// StrTo 提供字符串类型转换工具。
 	StrTo = strutil.StrTo
 	// String 提供 Unicode 安全的字符串处理工具。
-	String = stringutil.String
+	String = stringx.String
 	// Sync 提供标准同步容器辅助函数。
 	Sync = syncutil.Sync
 	// Time 提供日期和时间处理工具。
