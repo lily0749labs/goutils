@@ -86,7 +86,13 @@ RSA 加密推荐使用 `Crypto.EncryptRSAOAEP` / `DecryptRSAOAEP`，签名验签
 
 严格切片转换使用 `StrTo.IntsE`、`StrTo.UintsE`、`StrTo.BoolsE` 等方法，
 失败时 `ElementError` 会提供元素下标和原始值。时间解析推荐使用 `Time.ParseE`
-或 `Time.ParseLayoutE`；测试中可通过 `Time.WithNow` 注入固定时钟。
+或 `Time.ParseLayoutE`；测试中可通过 `Time.WithNow` 注入固定时钟，
+`now`、`yesterday` 和 `tomorrow` 也会使用该时钟。
+
+`Time.NowTime()` 保留 Go 单调时钟，适合计算进程内持续时间；如需转换到
+配置时区，使用 `Time.NowInTimezone()`。数据库范围查询推荐使用
+`TodayHalfOpenRange()`、`YesterdayHalfOpenRange()` 和 `PreviousMonthHalfOpenRange()`
+返回的 `[start, end)` 半开区间。
 
 ## 开发与验证
 
