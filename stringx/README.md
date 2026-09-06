@@ -13,7 +13,7 @@ clean := goutils.String.NormalizeSpace("  hello\tworld  ")
 如果需要直接导入子包，建议使用别名 `stringx`，避免和 Go 的预声明类型 `string` 混淆：
 
 ```go
-import stringx "github.com/lily-study-utils/goutils/string"
+import stringx "github.com/lily0749labs/goutils/string"
 
 blank := stringx.String.IsBlank(value)
 ```
