@@ -1,4 +1,4 @@
-package stringutil
+package stringx
 
 import (
 	"strings"
@@ -6,15 +6,15 @@ import (
 )
 
 // IsBlank 判断字符串是否为空或只包含 Unicode 空白字符。
-func (stringutil) IsBlank(value string) bool { return strings.TrimSpace(value) == "" }
+func (stringx) IsBlank(value string) bool { return strings.TrimSpace(value) == "" }
 
 // NormalizeSpace 将连续 Unicode 空白折叠为一个半角空格，并移除首尾空白。
-func (stringutil) NormalizeSpace(value string) string {
+func (stringx) NormalizeSpace(value string) string {
 	return strings.Join(strings.Fields(value), " ")
 }
 
 // Reverse 按 Unicode 字符反转字符串，不会拆开多字节字符。
-func (stringutil) Reverse(value string) string {
+func (stringx) Reverse(value string) string {
 	runes := []rune(value)
 	for left, right := 0, len(runes)-1; left < right; left, right = left+1, right-1 {
 		runes[left], runes[right] = runes[right], runes[left]
@@ -23,13 +23,13 @@ func (stringutil) Reverse(value string) string {
 }
 
 // Truncate 最多保留 maxRunes 个 Unicode 字符。
-func (stringutil) Truncate(value string, maxRunes int) string {
+func (stringx) Truncate(value string, maxRunes int) string {
 	return truncateWithSuffix(value, maxRunes, "")
 }
 
 // TruncateWithSuffix 将字符串限制在 maxRunes 个 Unicode 字符内，并在截断时追加 suffix。
 // suffix 计入最大长度；suffix 本身过长时也会被截断。
-func (stringutil) TruncateWithSuffix(value string, maxRunes int, suffix string) string {
+func (stringx) TruncateWithSuffix(value string, maxRunes int, suffix string) string {
 	return truncateWithSuffix(value, maxRunes, suffix)
 }
 
@@ -49,12 +49,12 @@ func truncateWithSuffix(value string, maxRunes int, suffix string) string {
 }
 
 // Mask 保留左右指定数量的 Unicode 字符，中间字符使用星号遮盖。
-func (s stringutil) Mask(value string, visibleLeft, visibleRight int) string {
+func (s stringx) Mask(value string, visibleLeft, visibleRight int) string {
 	return s.MaskWith(value, visibleLeft, visibleRight, '*')
 }
 
 // MaskWith 使用 mask 遮盖中间字符；mask 为零值时使用星号。
-func (stringutil) MaskWith(value string, visibleLeft, visibleRight int, mask rune) string {
+func (stringx) MaskWith(value string, visibleLeft, visibleRight int, mask rune) string {
 	if visibleLeft < 0 {
 		visibleLeft = 0
 	}
@@ -75,13 +75,13 @@ func (stringutil) MaskWith(value string, visibleLeft, visibleRight int, mask run
 }
 
 // Snake 将标识符转换为 snake_case。
-func (stringutil) Snake(value string) string { return strings.Join(splitWords(value), "_") }
+func (stringx) Snake(value string) string { return strings.Join(splitWords(value), "_") }
 
 // Kebab 将标识符转换为 kebab-case。
-func (stringutil) Kebab(value string) string { return strings.Join(splitWords(value), "-") }
+func (stringx) Kebab(value string) string { return strings.Join(splitWords(value), "-") }
 
 // Camel 将标识符转换为 lowerCamelCase。
-func (stringutil) Camel(value string) string {
+func (stringx) Camel(value string) string {
 	words := splitWords(value)
 	if len(words) == 0 {
 		return ""
@@ -95,7 +95,7 @@ func (stringutil) Camel(value string) string {
 }
 
 // Pascal 将标识符转换为 PascalCase。
-func (stringutil) Pascal(value string) string {
+func (stringx) Pascal(value string) string {
 	words := splitWords(value)
 	var builder strings.Builder
 	for _, word := range words {
