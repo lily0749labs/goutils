@@ -3,9 +3,8 @@ package rand
 import (
 	mathrand "math/rand"
 
-	engname "github.com/yelinaung/eng-name"
-
 	"github.com/lily0749labs/goutils/time"
+	engname "github.com/yelinaung/eng-name"
 )
 
 // EnglishName 返回一个随机英文名。
