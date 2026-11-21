@@ -7,6 +7,8 @@
 ### Added
 
 - 时间门面导出为 `time.Helper`，并新增时区时间、无溢出月份计算、显式错误和半开时间区间 API。
+- 新增 `pbtime` 子包：`pbtime.Format(ts, loc)` 把 protobuf 时间戳按指定时区格式化为 `YYYY-MM-DD HH:mm:ss`，未设置（nil）时返回空字符串；`pbtime.FromCarbon(t)` 把 carbon 时间转成 protobuf 时间戳，nil 和零时间返回 nil。单独成包，只有用到它的项目才会链接 `google.golang.org/protobuf`。
+- 新增 `dbtypes` 子包：泛型 `dbtypes.Array[T]` 对应 PostgreSQL 一维数组列（`text[]`、`smallint[]`、`integer[]`、`bigint[]`、`boolean[]`、`real[]`、`double precision[]`，`uint64` 用 `numeric(20,0)[]` 保存完整范围）。实现 `sql.Scanner` 和 `driver.Valuer`，按 PostgreSQL 数组文本格式读写，nil 切片写成 NULL、空切片写成 `{}`；只支持一维数组，元素不能为 NULL；只依赖标准库。
 
 ### Fixed
 

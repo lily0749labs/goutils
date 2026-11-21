@@ -22,6 +22,7 @@ go get github.com/lily0749labs/goutils@latest
 - `slice`：类型安全的泛型切片函数
 - `maps`：类型安全的泛型 Map 函数
 - `queue`：支持 Context 取消和并发关闭的泛型队列
+- `dbtypes`：数据库列的通用 Go 类型，泛型 `Array[T]` 对应 PostgreSQL 一维数组列（`text[]`、`integer[]`、`bigint[]` 等），只依赖标准库
 
 ## 使用门面
 

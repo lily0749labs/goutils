@@ -9,6 +9,7 @@ require (
 	github.com/shopspring/decimal v1.4.0
 	github.com/yelinaung/eng-name v0.0.0-20141214053408-d6af0256d2c0
 	golang.org/x/crypto v0.55.0
+	google.golang.org/protobuf v1.36.12
 )
 
 require gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 // indirect
